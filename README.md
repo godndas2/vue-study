@@ -1,4 +1,4 @@
-# study
+# Vue Pet-SHOP
 
 ## Project setup
 ```
