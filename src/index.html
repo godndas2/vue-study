@@ -16,6 +16,11 @@
       <div class="navbar-header">
         <h1 v-text="sitename"></h1>
       </div>
+      <div class="nav navbar-nav navbar-right cart">
+          <span class="glyphicon glyphicon-shopping-cart">
+              {{cartItemCount}}
+          </span>
+      </div>
     </div>
   </header>
   <!-- Mark up -->
@@ -32,8 +37,18 @@
         <p class="price">
           {{product.price | formatPrice}} <!-- {{property | filter }} -->
         </p>
+        <button class="btn btn-primary btn-lg"
+                v-on:click="addToCart"
+                v-show="canAddToCart">장바구니 담기 <!-- v-show: 지정된 값이 true인 것만 Markup Rendering -->
+        </button>
+        <!-- <button disabled="true" class="btn btn-primary btn-lg"
+            v-else>장바구니 담기
+        </button> -->
       </div>
     </div>
+    <!-- <div v-else>
+
+    </div> -->
   </main>
 </div>
 <script type="text/javascript">
@@ -48,7 +63,26 @@
         description: "당신의 고양이를 위한 <em>거부할 수 없는</em>, 유기농 25파운드 사료입니다.",
         price: 2000,
         image: "needtoimgsizefix", // assets/images/product-fullsize.png
+        availableInventory: 5
       },
+      cart: [] // 장바구니 Item을 담을 Array
+    },
+    methods: {
+        // this Keyword를 추가해야 모든 Data 속성 값에 접근 할 수 있다.
+        addToCart: function() {
+            this.cart.push( this.product.id );
+        }, // addToCart function 정의
+        showCheckout() {
+            this.showCheckout = this.showCheckout ? false: true;
+        },
+    },
+    computed: {
+        cartItemCount() { // 장바구니 배열에 있는 상품 개수를 반환 (계산된 객체 추가)
+            return this.cart.length || '';
+        },
+        canAddToCart() {
+            return this.product.availableInventory > this.cartItemCount; // 현재 장바구니 상품 개수와 availableInventory 비교
+        }
     },
     filters: { // Vue Instance Option의 filters
       formatPrice(price) {
