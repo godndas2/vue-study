@@ -79,7 +79,7 @@
                   <strong>주:</strong>
                   <select v-model="order.state" class="form-control">
                     <option disabled value="">주</option>
-                    <option v-for="(state, key) in states" v-bind:value="state">
+                    <option v-for="(state, key) in states" v-bind:value="state"> <!-- v-for: stat in states 문법 -->
                       {{key}}
                     </option>
                   </select>
@@ -164,12 +164,12 @@
           city: '',
           zip: '',
           state: '',
-          method: '자택 주소',
+          method: '자택 주소', // default
           business: '직장 주소',
           home: '자택 주소',
           gift:'선물로 보내기',
-          sendGift: '선물로 보내기',
-          dontSendGift: '선물로 보내기 않기'
+          sendGift: '선물로 보내기', // check box: able
+          dontSendGift: '선물로 보내기 않기' // check box: disable
         },
         product: {
           id: 1001,
