@@ -1,1 +1,2 @@
-https://vuejsexamples.com/
+https://vuejsexamples.com/  
+## es6 - memo
